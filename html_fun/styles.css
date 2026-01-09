@@ -1,7 +1,9 @@
+/* plain-old boring css */
 body {
     background: black;
 }
 
+/* the orange box that spins on hover on index.html */
 .orangeBox {
   
 
@@ -20,9 +22,32 @@ body {
     
 }   
 
+.congrats-page {
+    color: whitesmoke;
+}
+
+.return-home-link {
+    color: whitesmoke;
+    text-align: center;
+}
+
+.return-home-button {
+
+    position: fixed;
+    top: 47.8%;
+    left: 47.8%;
+    background-color: darkgreen;
+    width: 200px;
+    height: 30px;
+}
+
+
+/* special effects */
 .orangeBox:hover {
     animation: spin3D 2s linear infinite;
 }
+
+/* animaion keyframing */
 
 @keyframes spin3D {
     from {
