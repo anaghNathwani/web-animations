@@ -1,0 +1,51 @@
+/* 🔑 REQUIRED for Monaco */
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+/* App layout */
+body {
+  background: #1e1e1e;
+  color: white;
+  font-family: system-ui, sans-serif;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top bar */
+header {
+  padding: 10px;
+  background: #252526;
+
+  display: flex;
+  gap: 10px;
+
+  flex-shrink: 0;
+}
+
+/* Buttons */
+button {
+  background: #007acc;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background: #0098ff;
+}
+
+/* 🔑 Monaco needs this */
+#editor {
+  position: fixed;
+  top: 52px;      /* height of header */
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+

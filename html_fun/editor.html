@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Web VS Code-Like Editor</title>
+
+  <!-- Monaco Editor -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+
+  <!-- 🔑 REQUIRED Monaco CSS -->
+  <link
+    rel="stylesheet"
+    data-name="vs/editor/editor.main"
+    href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/editor/editor.main.min.css"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <header>
+    <button onclick="saveWorkspace()">💾 Download</button>
+    <input type="file" id="upload" accept=".json" />
+  </header>
+
+  <div id="editor"></div>
+
+  <script>
+    const FILE_NAME = "main.js";
+
+    let editor;
+    let model;
+
+    const defaultContent = `// Welcome 👋
+// This is a VS Code–powered web editor.
+// Download your work and upload it later to continue.
+
+function hello() {
+  console.log("Hello world!");
+}
+`;
+
+    require.config({
+      paths: {
+        vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs"
+      }
+    });
+
+    require(["vs/editor/editor.main"], () => {
+      model = monaco.editor.createModel(
+        defaultContent,
+        "javascript",
+        monaco.Uri.parse(`file:///${FILE_NAME}`)
+      );
+
+      editor = monaco.editor.create(document.getElementById("editor"), {
+        model,
+        theme: "vs-dark",
+        automaticLayout: true,
+        fontSize: 14
+      });
+    });
+
+    // 💾 Save workspace
+    function saveWorkspace() {
+      const data = {
+        filename: FILE_NAME,
+        content: model.getValue(),
+        language: model.getLanguageId()
+      };
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], {
+        type: "application/json"
+      });
+
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "workspace.json";
+      link.click();
+    }
+
+    // 📂 Load workspace
+    document.getElementById("upload").addEventListener("change", e => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const data = JSON.parse(reader.result);
+
+        model.setValue(data.content);
+        monaco.editor.setModelLanguage(model, data.language);
+      };
+      reader.readAsText(file);
+    });
+  </script>
+</body>
+</html>
