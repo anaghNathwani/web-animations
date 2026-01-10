@@ -3,6 +3,21 @@ body {
     background: black;
 }
 
+h1 {
+    color: whitesmoke;
+    text-align: center;
+}
+
+h2 {
+    color: whitesmoke;
+    text-align: center;
+}
+
+p {
+    color: whitesmoke;
+    text-align: center;
+}
+
 /* the orange box that spins on hover on index.html */
 .orangeBox {
   
