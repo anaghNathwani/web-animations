@@ -14,13 +14,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Upload Pages Artifact
+      - name: Upload website files
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: html_fun
 
-      - name: Deploy to GitHub Pages
+      - name: Publish to GitHub Pages
         uses: actions/deploy-pages@v4
